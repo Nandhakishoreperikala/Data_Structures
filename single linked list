@@ -1,0 +1,152 @@
+#include<stdio.h>                                                                                
+#include<stdlib.h>
+void create();
+void display();
+void ins_beg();
+struct node {                                                                                            
+int data;                                                                                        
+struct node* next;                                                                                  
+ }*newnode,*temp;                                                                      
+struct node* head = NULL;                                                                        
+struct node* tail = NULL;
+void create ()                                                                                    
+{                                                                                                        
+char ch;                                                                                          
+int value;                                                                                        
+do                                                                                              
+ {                                                                                                        
+newnode=(struct node*)malloc(sizeof(struct node));                                                
+printf("enter the value");                                                                      
+ scanf("%d",&value);                                                                              
+newnode->data=value;                                                                              
+newnode->next=NULL;                                                                              
+if(head==NULL)                                                                                  
+ {                                                                                                        
+head = newnode;                                                                                  
+tail = newnode;                                                                          
+ }      
+ else                                                                                            
+ {                                                                                                        
+tail->next=newnode;                                                                            
+  tail=newnode;                                                                            
+}                                                                                                
+ printf("C-continue,E-exit\n");                                                                    
+scanf(" %c",&ch);                                                                        
+ }                                                                                                
+while(ch == 'C');                                                                        
+}
+void display()                                                                                  
+ {                                                                                                        
+ temp = head;
+while(temp!=NULL)                                                                                
+{                                                                                                      
+  printf("%d ",temp->data);                                                                      
+  temp=temp->next;                                                                        
+}
+}
+void ins_beg()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value:");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=head;
+    head=newnode;
+}
+void ins_end()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value:");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    tail->next=newnode;
+    tail=newnode;
+}
+void ins_spe()
+{
+    int pos,value,i;
+    temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value:\n");
+    scanf("%d",&value);
+    printf("enter position:\n");
+    scanf("%d",&pos);
+    for(i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+    }
+    newnode->data=value;
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+void del_beg()
+{
+    temp=head;
+    head=head->next;
+    temp->next=NULL;
+}
+void del_end()
+{
+    temp=head;
+    while(temp->next!=tail)
+    {
+        temp=temp->next;
+    }
+    temp->next=NULL;
+    tail=temp;
+}
+void del_pos()
+{
+    temp=head;
+    int pos,i;
+    printf("enter position:\n");
+    scanf("%d",&pos);
+    for(i=0;i<pos-1;i++)
+    temp=temp->next;
+    temp->next=temp->next->next;
+}
+void main()
+{
+  int choice;
+  printf("enter choice:\n");
+  scanf("%d",&choice);
+  if(choice==1)
+  {
+      create();
+      display();
+  }else if(choice==2)
+  {
+      create();
+      ins_beg();
+      display();
+  }
+  else if(choice==3)
+  {
+      create();
+      ins_end();
+      display();
+  }else if(choice==4)
+  {
+      create();
+      ins_spe();
+      display();
+  }else if(choice==5)
+  {
+      create();
+      del_beg();
+      display();
+  }else if(choice==6)
+  {
+      create();
+      del_end();
+      display();
+  }else
+  {
+      create();
+      del_pos();
+      display();
+  }
+}
